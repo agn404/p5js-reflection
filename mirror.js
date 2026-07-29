@@ -29,6 +29,7 @@ let isPanning = false; // Tracks whether the user is panning the screen
 let offsetX = 0;
 let offsetY = 0;
 let dragMode = ''; 
+let allowedToDrag = false; //<- latest commit
 let lockTail = false;
 let splitSources = false; // Toggles superimposing sources
 
@@ -781,7 +782,7 @@ function isMouseNearRay(r) {
 
 // Handles panning and ray transformations mapped to the world coordinates
 function dragRayAround() {
-  if (mouseIsPressed) {
+  if (mouseIsPressed && allowedToDrag) {
     if (!isDragging && !isPanning) {
       let grabbedAny = false;
       for (let i = 0; i < rays.length; i++) {
@@ -840,6 +841,18 @@ function dragRayAround() {
 
 function mousePressed() {
   mPressed = true;
+  
+  // Only allow dragging or panning if the press begins inside the canvas bounds
+  if (mouseX >= 0 && mouseX <= width && mouseY >= 0 && mouseY <= height) {
+    allowedToDrag = true;
+  } else {
+    allowedToDrag = false;
+  }
+}
+
+function mouseReleased() {
+  mPressed = false;
+  allowedToDrag = false;
 }
 
 function drawVectorArrow(origin, vec, len = 50, col = 'white') {
