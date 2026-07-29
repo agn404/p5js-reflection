@@ -101,6 +101,7 @@ function setup() {
   canvas = createCanvas(0.8*vw,document.getElementById("canvasParent").clientHeight*0.8); 
   canvas.parent("canvasWrapper");
   canvas.style("border-radius","8px");
+  canvas.style("touch-action", "none");
   
   R = 100;
   angle_c = PI/2;
@@ -840,9 +841,20 @@ function dragRayAround() {
 }
 
 function mousePressed() {
+  handleStartInteraction();
+}
+
+function touchStarted() {
+  handleStartInteraction();
+  // Prevent default scroll behavior on mobile if touching inside the canvas
+  if (allowedToDrag) {
+    return false; 
+  }
+}
+
+function handleStartInteraction() {
   mPressed = true;
-  
-  // Only allow dragging or panning if the press begins inside the canvas bounds
+  // Checks if the touch or click started within the canvas boundaries
   if (mouseX >= 0 && mouseX <= width && mouseY >= 0 && mouseY <= height) {
     allowedToDrag = true;
   } else {
@@ -851,6 +863,14 @@ function mousePressed() {
 }
 
 function mouseReleased() {
+  handleEndInteraction();
+}
+
+function touchEnded() {
+  handleEndInteraction();
+}
+
+function handleEndInteraction() {
   mPressed = false;
   allowedToDrag = false;
 }
