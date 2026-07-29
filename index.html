@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title> Mirror Simulation </title>
+	<meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="style.css">
+	<script src="mirror.js">
+</head>
+<body>
+	<div id="container">
+  <div id="canvasParent">
+    <span id="title"><i>MIRROR SIMULATION</i></span>
+    
+    <!-- Wrapper containing the canvas and its floating overlay -->
+    <div id="canvasWrapper">
+      <!-- p5.js canvas will be targeted to mount inside this container -->
+      
+      <!-- Optics Parameters Panel (strictly over the canvas area) -->
+      <div id="opticsSidePanel">
+  <div class="panel-title" id="panelToggle">
+    <span>Optics Parameters</span>
+    <span id="toggleArrow">▲</span>
+  </div>
+  
+  <!-- Container that will hide/show -->
+  <div id="panelContent">
+    <div class="panel-rows">
+      <div class="panel-row">
+        <span>Obj. Distance (u):</span>
+        <input type="number" id="inputU" step="1" />
+      </div>
+      <div class="panel-row">
+        <span>Img. Distance (v):</span>
+        <span id="readoutV" class="highlight-val">-</span>
+      </div>
+      <div class="panel-row">
+        <span>Radius (R):</span>
+        <input type="number" id="inputR" step="1" />
+      </div>
+      <div class="panel-row">
+        <span>Focal Length (f):</span>
+        <input type="number" id="inputF" step="1" />
+      </div>
+      <div class="panel-row">
+        <span>Obj. Height (h):</span>
+        <input type="number" id="inputH" step="1" />
+      </div>
+      <div class="panel-row">
+        <span>Img. Height (h'):</span>
+        <span id="readoutHPrime" class="highlight-val">-</span>
+      </div>
+    </div>
+    <div class="panel-footer">Cartesian Sign Convention Active</div>
+  </div>
+</div>
+    </div>
+
+    <!-- Controls moved below the canvas wrapper -->
+    <div id="anchorUI">
+      <input type="checkbox" id="lockTailCheckbox">
+      <label id="anchor-label-id" for="lockTailCheckbox">anchor</label>
+      
+      <input type="checkbox" id="splitCheckbox">
+      <label id="split-label-id" for="splitCheckbox">split sources</label>
+      
+      <button id="addRayBtn">add ray</button>
+      <button id="focusBtn">focus image</button>
+      <button id="resetBtn">reset view</button>
+    </div>
+  </div>
+
+  <div id="UI">
+    <h2>choose type of mirror</h2>
+    <input type="radio" id="plane" name="choice" value="0" checked>
+    <label for="plane"><i>plane</i></label>
+    <input type="radio" id="concave" name="choice" value="1">
+    <label for="concave"><i>concave</i></label>
+    <input type="radio" id="convex" name="choice" value="2">
+    <label for="convex"><i>convex</i></label>
+  </div>
+
+  <div id="legend">
+    <h3><span id="index">INDEX<a href="https://google.com/" id="info">ⓘ</a> </span></h3>
+    <p><i><span id="S1">yellow - incident ray; </span> <span id="S2">white - normal ray; </span><span id="S3">blue - reflected ray;</span></i></p>
+  </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,298 @@
+@import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&display=swap'); 
+@import url('https://fonts.googleapis.com/css2?family=Patrick+Hand&display=swap'); 
+@import url('https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,200..900;1,8..60,200..900&display=swap'); 
+
+body {
+  background: linear-gradient(to bottom left, rgba(200,50,200,1), rgba(255,40,100,1));
+  overflow: auto;
+  min-height: 100vh;
+}
+
+#title {
+  font-family: "Source Serif 4", serif;
+  letter-spacing: 0.5em;
+}
+
+#container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 20px;
+}
+
+#canvasParent {
+  position: relative; /* Crucial: Allows the side panel overlay to position absolutely within parent */
+  height: 75vh;
+  width: 80vw;
+  display: flex;
+  flex-direction: column;
+  background: rgba(50,50,65,1);
+  font-family: "Instrument Serif", serif;
+  color: rgba(250,250,255,1);
+  place-items: center;
+  box-shadow: 12px 12px 20px rgba(50,50,65,0.8);
+  border-radius: 4px;
+  padding: 10px;
+  gap: 5px;
+}
+
+#UI {
+  display:flex;
+  flex-direction: row;
+  align-items:center;
+  padding: 4px;
+  gap: 8px;
+  font-family: "Instrument Serif", serif;
+  color: rgba(10,10,30,1);
+}
+
+input[type="checkbox"] {
+  appearance: none;
+  -webkit-appearance: none;
+
+  width: 18px;
+  height: 18px;
+  border: 1px solid white;
+  border-radius: 4px;
+  background: transparent;
+  cursor: pointer;
+  font-family: "Instrument Serif", serif;
+  line-height: 16px;
+  vertical-align: middle;
+}
+
+input[type="checkbox"]:checked {
+  background: white;
+}
+
+input[type="checkbox"]:checked::after {
+  content: "✔";
+  color: green;
+  display: block;
+  text-align: center;
+  line-height: 16px;
+  font-size: 14px;
+}
+
+#anchorUI {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 2px;
+    font-family: "Instrument Serif", serif;
+    color: white;
+}
+
+#anchor-label-id,
+#split-label-id {
+  cursor: pointer;
+  font-family: "Instrument Serif", serif;
+  letter-spacing: 0.2em;
+}
+
+#anchorUI button {
+  padding: 4px 10px;
+  cursor: pointer;
+  border-radius: 4px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  background-color: rgba(255, 255, 255, 0.1);
+  color: #fff;
+  font-family: "Instrument Serif", serif;
+  font-size: 16px;
+  letter-spacing: 0.1em;
+  transition: background-color 0.15s ease, color 0.15s ease;
+}
+
+#anchorUI button:hover {
+  background-color: rgba(255, 255, 255, 0.9);
+  color: #000;
+}
+
+#anchorUI button:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.panel-title {
+  font-family: Arial, sans serif;
+  font-weight: 600;
+  font-size: 14px;
+  margin-bottom: 12px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+  padding-bottom: 6px;
+  letter-spacing: 0.1em;
+  
+  /* Added styles for dropdown interactivity */
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  user-select: none;
+}
+
+/* Arrow indicator styles */
+#toggleArrow {
+  font-size: 10px;
+}
+
+/* Collapse behavior styles */
+#opticsSidePanel.collapsed #panelContent {
+  display: none;
+}
+
+#opticsSidePanel.collapsed .panel-title {
+  border-bottom: none;
+  padding-bottom: 0;
+  margin-bottom: 0;
+}
+
+.panel-rows {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.panel-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.panel-row input[type="number"] {
+  width: 75px;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  color: white;
+  padding: 2px 4px;
+  border-radius: 4px;
+  text-align: right;
+  font-family: Arial, sans-serif;
+}
+
+.panel-row input[type="number"]:focus {
+  outline: none;
+  border-color: rgba(255, 255, 255, 0.5);
+  background: rgba(255, 255, 255, 0.15);
+}
+
+.highlight-val {
+  font-weight: 500;
+  color: #ff6666;
+}
+
+.panel-footer {
+  font-size: 10px;
+  color: rgba(255, 255, 255, 0.5);
+  margin-top: 10px;
+  text-align: center;
+  font-style: italic;
+}
+
+::-webkit-scrollbar {
+  display: none;
+}
+
+html {
+  scrollbar-width: none;
+}/* for firefox */
+
+#index {
+  font-family: "Instrument Serif", serif;
+  font-weight: 900;
+  letter-spacing: 0.1em;
+}
+
+#S1 {
+  font-family: Arial, sans-serif;
+  color: rgba(250,250,10,0.8);
+}
+
+#S2 {
+  font-family: Arial, sans-serif;
+  color: rgba(250,250,250,0.8);
+}
+
+#S3 {
+  font-family: Arial, sans-serif;
+  color: rgba(10,250,250,0.8);
+}
+
+#legend {
+  white-space: nowrap;
+  letter-spacing: 0.05em;
+}
+
+#info {
+  color: navy;
+  text-decoration: none;
+  font-weight: 700;
+}
+
+input[type="radio"] {
+  appearance: none;
+  -webkit-appearance: none;
+
+  width: 18px;
+  height: 18px;
+  border: 2px solid white;
+  border-radius: 50%;
+  background: transparent;
+  cursor: pointer;
+
+  transition: transform 0.15s ease;
+}
+
+input[type="radio"]:active {
+  transform: scale(0.85);
+}
+
+input[type="radio"]:checked {
+  background: white;
+  animation: pop 0.2s ease;
+}
+
+@keyframes pop {
+  0% {
+    transform: scale(0.7);
+  }
+  60% {
+    transform: scale(1.2);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+label[for="plane"],
+label[for="concave"],
+label[for="convex"] {
+  font-family: Arial, sans-serif;
+  font-size: 17.5px;
+}
+
+#canvasWrapper {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin:8px;
+}
+
+#opticsSidePanel {
+  position: absolute;
+  top: 10px;    /* Positions the panel strictly inside the canvas viewport */
+  right: 10px;  /* Positions the panel strictly inside the canvas viewport */
+  width: 220px;
+  background: rgba(25, 25, 35, 0.85);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  color: #fff;
+  padding: 12px 16px;
+  border-radius: 8px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+  font-family: Arial, sans-serif;
+  font-size: 13px;
+  z-index: 1000;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
